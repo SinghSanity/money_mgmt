@@ -1,0 +1,7 @@
+[BASIC]
+# Good variable names which should always be accepted, separated by a comma.
+good-names=i, e, c
+
+[MESSAGES CONTROL]
+# Disabling some generic lint issues
+disable = broad-exception-caught, broad-exception-raised, consider-using-f-string

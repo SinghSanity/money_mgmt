@@ -1,3 +1,4 @@
+'''Functionality for users'''
 import sqlite3
 from db.utils import select_helper
 
@@ -15,7 +16,7 @@ def add_user(username, first_name, last_name):
             raise Exception("This username is already in the table. Please use a different one.")
         if not first_name or not last_name:
             raise Exception("First Name or Last Name is not provided.")
-        
+
         s_sql = '''
             INSERT INTO users (username, first_name, last_name)
             VALUES('{0}', '{1}', '{2}');
@@ -30,7 +31,6 @@ def add_user(username, first_name, last_name):
         conn.commit()
         conn.close()
         print("Successfully added user to the table.")
-        return None
     except Exception as e:
         print("Caught this exception: " + str(e))
 
@@ -55,7 +55,6 @@ def remove_user(username):
         conn.commit()
         conn.close()
         print("Successfully removed user from the table.")
-        return None
     except Exception as e:
         print("Caught this exception: " + str(e))
 

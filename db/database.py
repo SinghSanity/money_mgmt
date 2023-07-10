@@ -1,3 +1,4 @@
+'''File used to create database tables.'''
 import sqlite3
 
 # Connect to / Create  DB
@@ -8,7 +9,7 @@ c = conn.cursor()
 
 # Create tables
 
-users_sql = '''
+USERS_SQL = '''
     CREATE TABLE IF NOT EXISTS users(
         username TEXT NOT NULL UNIQUE,
         first_name TEXT NOT NULL,
@@ -17,7 +18,7 @@ users_sql = '''
     );
 '''
 
-accounts_sql = '''
+ACCOUNTS_SQL = '''
     CREATE TABLE IF NOT EXISTS accounts(
         account_number INTEGER NOT NULL UNIQUE,
         username TEXT,
@@ -29,7 +30,7 @@ accounts_sql = '''
     );
 '''
 
-checking_sql = '''
+CHECKING_SQL = '''
     CREATE TABLE IF NOT EXISTS checking (
     account_number INTEGER NOT NULL,
     transaction_id INTEGER,
@@ -44,18 +45,18 @@ checking_sql = '''
 '''
 
 # Drop tables if needed
-# drop_users_sql = '''DROP TABLE IF EXISTS users'''
-# drop_accounts_sql = '''DROP TABLE IF EXISTS accounts'''
-# drop_checking_sql = '''DROP TABLE IF EXISTS checking'''
-# c.execute(drop_users_sql)
-# c.execute(drop_accounts_sql)
-# c.execute(drop_checking_sql)
+# DROP_USERS_SQL = '''DROP TABLE IF EXISTS users'''
+# DROP_ACCOUNTS_SQL = '''DROP TABLE IF EXISTS accounts'''
+# DROP_CHECKING_SQL = '''DROP TABLE IF EXISTS checking'''
+# c.execute(DROP_USERS_SQL)
+# c.execute(DROP_ACCOUNTS_SQL)
+# c.execute(DROP_CHECKING_SQL)
 
 
 # Execute Queries
-c.execute(users_sql)
-c.execute(accounts_sql)
-c.execute(checking_sql)
+c.execute(USERS_SQL)
+c.execute(ACCOUNTS_SQL)
+c.execute(CHECKING_SQL)
 
 # Commit sql
 conn.commit()

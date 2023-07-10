@@ -1,6 +1,7 @@
+'''Contains utility functions for the database'''
 import sqlite3
 
-def select_helper(attributes=[], table=None, where_clause = ''):
+def select_helper(attributes=None, table=None, where_clause = ''):
     '''Helper function to select from the table'''
     items = ''
     table_name = table
@@ -23,7 +24,8 @@ def select_helper(attributes=[], table=None, where_clause = ''):
         '''.format(items, table_name, condition)
 
     except Exception as e:
-        print("Caught this error in select_helper: " + str(e))
+        print("Caught this error in select_helper: " + repr(e))
+        return None
 
     # Try to execute the query and return data
     try:
@@ -44,5 +46,4 @@ def select_helper(attributes=[], table=None, where_clause = ''):
         return rows
     except Exception as e:
         print("Caught this error while querying the table: " + str(e))
-
-
+        return None
