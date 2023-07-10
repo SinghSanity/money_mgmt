@@ -10,20 +10,20 @@ c = conn.cursor()
 
 users_sql = '''
     CREATE TABLE IF NOT EXISTS users(
-        username TEXT,
-        first_name TEXT,
-        last_name TEXT,
+        username TEXT NOT NULL UNIQUE,
+        first_name TEXT NOT NULL,
+        last_name TEXT NOT NULL,
         PRIMARY KEY (username)
     );
 '''
 
 accounts_sql = '''
     CREATE TABLE IF NOT EXISTS accounts(
-        account_number INTEGER,
+        account_number INTEGER NOT NULL UNIQUE,
         username TEXT,
-        account_type TEXT,
-        bank_name TEXT,
-        routing_number INTEGER,
+        account_type TEXT NOT NULL,
+        bank_name TEXT NOT NULL,
+        routing_number INTEGER NOT NULL,
         PRIMARY KEY (account_number),
         FOREIGN KEY (username) REFERENCES users(username)
     );
@@ -31,13 +31,13 @@ accounts_sql = '''
 
 checking_sql = '''
     CREATE TABLE IF NOT EXISTS checking (
-    account_number INTEGER,
+    account_number INTEGER NOT NULL,
     transaction_id INTEGER,
-    date TEXT,
+    date TEXT NOT NULL,
     description TEXT,
-    payment_amt REAL,
-    deposit_amt REAL,
-    balance REAL,
+    payment_amt REAL NOT NULL DEFAULT 0,
+    deposit_amt REAL NOT NULL DEFAULT 0,
+    balance REAL NOT NULL DEFAULT 0,
     PRIMARY KEY (account_number, transaction_id),
     FOREIGN KEY (account_number) REFERENCES accounts(account_number)
     );
