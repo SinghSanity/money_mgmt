@@ -1,8 +1,13 @@
 '''File used to create database tables.'''
+import os
 import sqlite3
+from dotenv import load_dotenv
+
+load_dotenv()
+GLOBAL_DB = os.getenv('GLOBAL_DB')
 
 # Connect to / Create  DB
-conn = sqlite3.connect('money.db')
+conn = sqlite3.connect(GLOBAL_DB)
 
 # Cursor
 c = conn.cursor()

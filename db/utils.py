@@ -1,5 +1,10 @@
 '''Contains utility functions for the database'''
+import os
 import sqlite3
+from dotenv import load_dotenv
+
+load_dotenv()
+GLOBAL_DB = os.getenv('GLOBAL_DB')
 
 def select_helper(attributes=None, table=None, where_clause = ''):
     '''Helper function to select from the table'''
@@ -29,7 +34,7 @@ def select_helper(attributes=None, table=None, where_clause = ''):
 
     # Try to execute the query and return data
     try:
-        conn = sqlite3.connect('money.db')
+        conn = sqlite3.connect(GLOBAL_DB)
         # Cursor
         c = conn.cursor()
 

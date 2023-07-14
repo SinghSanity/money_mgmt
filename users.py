@@ -1,12 +1,21 @@
 '''Functionality for users'''
+import os
 import sqlite3
+from dotenv import load_dotenv
 from db.utils import select_helper
+
+load_dotenv()
+GLOBAL_DB = os.getenv('GLOBAL_DB')
 
 def get_users():
     '''Returns a list of all usernames currently available'''
-    user_list = select_helper(attributes=['username'], table='users')
-    user_list = [item[0] for item in user_list]
-    return user_list
+    try:
+        user_list = select_helper(attributes=['username'], table='users')
+        user_list = [item[0] for item in user_list]
+        return user_list
+    except Exception as e:
+        print("Caught this exception: " + repr(e))
+        return None
 
 def add_user(username, first_name, last_name):
     '''Add a user to the database'''
@@ -22,7 +31,7 @@ def add_user(username, first_name, last_name):
             VALUES('{0}', '{1}', '{2}');
         '''.format(str(username), str(first_name), str(last_name))
 
-        conn = sqlite3.connect('money.db')
+        conn = sqlite3.connect(GLOBAL_DB)
         c = conn.cursor()
 
         print("Executing query: " + s_sql)
@@ -46,7 +55,7 @@ def remove_user(username):
             WHERE username = '{0}';
         '''.format(str(username))
 
-        conn = sqlite3.connect('money.db')
+        conn = sqlite3.connect(GLOBAL_DB)
         c = conn.cursor()
 
         print("Executing query: " + s_sql)
@@ -56,10 +65,10 @@ def remove_user(username):
         conn.close()
         print("Successfully removed user from the table.")
     except Exception as e:
-        print("Caught this exception: " + str(e))
+        print("Caught this exception: " + repr(e))
 
 if __name__ == '__main__':
     pass
     # print(get_users())
-    # set_user('username', 'First_Name', 'Last_Name')
+    # add_user('username', 'First_Name', 'Last_Name')
     # remove_user(username='username')
